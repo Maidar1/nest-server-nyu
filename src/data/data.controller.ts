@@ -11,8 +11,6 @@ import { DataService } from './data.service';
 import { CreateDatumDto } from './dto/create-datum.dto';
 import { UpdateDatumDto } from './dto/update-datum.dto';
 
-let temp_data = '';
-
 @Controller('data')
 export class DataController {
   constructor(private readonly dataService: DataService) {}

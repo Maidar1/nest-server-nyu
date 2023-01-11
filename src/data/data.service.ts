@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateDatumDto } from './dto/create-datum.dto';
 import { UpdateDatumDto } from './dto/update-datum.dto';
+import { Datum } from './entities/datum.entity';
 
 @Injectable()
 export class DataService {
+  constructor(
+    @InjectRepository(Datum) private readonly datumRepo: Repository<Datum>,
+  ) {}
   create(createDatumDto: CreateDatumDto) {
-    return createDatumDto;
+    return this.datumRepo.save(createDatumDto);
   }
 
   findAll() {
-    return `This action returns all data`;
+    return this.datumRepo.find();
   }
 
   findOne(id: number) {
